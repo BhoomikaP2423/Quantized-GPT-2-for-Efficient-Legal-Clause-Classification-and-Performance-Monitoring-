@@ -1,72 +1,68 @@
 # Legal Clause Classification Using GPT-2 and Model Quantization
 
-## Project Overview
+## 1. Project Overview
 
-This project focuses on fine-tuning a GPT-2-based language model for legal clause classification and evaluating the effect of post-training quantization on model performance.
+This project focuses on fine-tuning a GPT-2-based language model for legal clause classification and applying post-training quantization techniques to reduce model size and evaluate inference efficiency.
 
-The main objective is to reduce model size and improve inference efficiency while maintaining reasonable classification accuracy. This is particularly useful for legal aid workers who need to process large numbers of legal documents efficiently.
+The project compares the original model with dynamically and statically quantized versions based on model size, inference time, and classification accuracy.
 
-## Objectives
+The implementation is performed using Python in Google Colab.
 
-- Fine-tune a GPT-2-based model for legal clause classification.
-- Apply Dynamic Post-Training Quantization (Dynamic PTQ).
-- Apply Static Post-Training Quantization (Static PTQ).
-- Compare the original and quantized models.
-- Evaluate model size, inference time, and classification accuracy.
-- Present the comparison through graphs and a performance dashboard.
+## 2. Objectives
 
-## Dataset
+- Fine-tune a pretrained GPT-2 model for legal clause classification.
+- Apply Dynamic Post-Training Quantization (PTQ).
+- Apply Static Post-Training Quantization (PTQ).
+- Compare original and quantized model performance.
+- Measure model size and inference time.
+- Visualize the comparison using a performance dashboard.
 
-**Dataset:** LEDGAR (Legal Entity and Governance Aspects Dataset), available through the LexGLUE benchmark.
+## 3. Dataset
 
-The experiment uses six frequently occurring legal clause categories selected from the training dataset.
+**Dataset:** LEDGAR from the LexGLUE benchmark.
 
-The dataset is prepared into:
-- 500 training samples
-- 500 testing samples
+LEDGAR contains legal provisions and their corresponding clause labels.
 
-The text is tokenized using the GPT-2 tokenizer with a maximum sequence length of 128 tokens.
+For this experiment:
+- Six frequently occurring clause categories are selected.
+- 500 samples are used for training.
+- 500 samples are used for testing.
+- Text is tokenized using the pretrained GPT-2 tokenizer.
+- Maximum sequence length: 128 tokens.
 
-## Technologies Used
+## 4. Technologies Used
 
-- Python
-- PyTorch
-- Hugging Face Transformers
-- Hugging Face Datasets
-- NumPy
-- Pandas
-- Matplotlib
+| Technology | Purpose |
+|---|---|
+| Python | Programming language |
+| PyTorch | Model training and quantization |
+| Hugging Face Transformers | Pretrained GPT-2 model |
+| Hugging Face Datasets | Dataset loading |
+| NumPy | Numerical operations |
+| Pandas | Results analysis |
+| Matplotlib | Dashboard visualizations |
+| Google Colab | Development environment |
 
-## Project Workflow
+## 5. Methodology
 
-### 1. Dataset Preparation
-- Load the LEDGAR dataset.
-- Select the six most frequent clause categories.
-- Prepare training and testing samples.
-- Tokenize the legal text.
+### Step 1: Dataset Preparation
+The LEDGAR dataset is loaded and filtered to select six frequently occurring legal clause categories. Training and testing samples are prepared and tokenized.
 
-### 2. Model Fine-Tuning
-- Load the pretrained DistilGPT-2 model with a classification head.
-- Fine-tune the model using the selected legal clause samples.
-- Evaluate the original model on the test dataset.
+### Step 2: GPT-2 Fine-Tuning
+A pretrained DistilGPT-2 model with a sequence classification head is fine-tuned on the selected legal clause dataset.
 
-### 3. Dynamic Post-Training Quantization
-- Convert supported transformer projection layers into Linear layers.
-- Apply dynamic INT8 quantization to supported Linear layers.
-- Evaluate the quantized model.
+### Step 3: Dynamic Post-Training Quantization
+Dynamic INT8 quantization is applied to supported Linear layers. This reduces the precision of model weights and performs activation quantization dynamically during inference.
 
-### 4. Static Post-Training Quantization
-- Apply static quantization to the classification head.
-- Calibrate the model using representative training samples.
-- Convert the classification head to quantized operations.
-- Evaluate its classification accuracy.
+### Step 4: Static Post-Training Quantization
+Static quantization is applied to the classification head. Calibration samples are used to estimate activation ranges before converting the supported layers into quantized operations.
 
-### 5. Performance Evaluation
-The following metrics are compared:
+### Step 5: Performance Evaluation
+The three model versions are evaluated using the same test dataset.
 
-- **Model Size:** Serialized model state size in MB.
-- **Inference Time:** Average time taken to classify one sample in milliseconds.
-- **Accuracy:** Percentage of correctly classified legal clauses.
+The evaluation considers:
+- Model size in MB.
+- Average inference time per sample.
+- Classification accuracy.
 
-### 6. Dashboard
-The project generates
+## 6. Performance
