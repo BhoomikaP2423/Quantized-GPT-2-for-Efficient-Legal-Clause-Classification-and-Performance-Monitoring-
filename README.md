@@ -1,5 +1,5 @@
 # mini-gpt: a decoder-only GPT written from scratch in PyTorch
-
+[![Built with askThili](https://msrit.ask.thili.ai/api/v1/public/projects/23snjh3qpz/badge.svg)](https://msrit.ask.thili.ai/b/23snjh3qpz)
 A small GPT (the architecture behind GPT-2 and Llama) built layer by layer:
 character tokenizer, token + position embeddings, hand-written masked
 self-attention, transformer blocks, training loop, and sampling. No
